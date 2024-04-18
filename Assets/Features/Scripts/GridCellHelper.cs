@@ -29,13 +29,13 @@ namespace GridSystem
             switch (gridTileState)
             {
                 case(GridTileState.normal):
-                    TileMaterial.gameObject.GetComponent<MeshRenderer>().material.color = Normal;////HexaMaterial.color = Normal;
+                    TileMaterial.gameObject.GetComponent<SpriteRenderer>().material.color = Normal;////HexaMaterial.color = Normal;
                     break;
                 case(GridTileState.selected):
-                    TileMaterial.GetComponent<MeshRenderer>().material.color = Selected;
+                    TileMaterial.GetComponent<SpriteRenderer>().material.color = Selected;
                     break;
                 case(GridTileState.neighbour):
-                    TileMaterial.GetComponent<MeshRenderer>().material.color = Neighbour;
+                    TileMaterial.GetComponent<SpriteRenderer>().material.color = Neighbour;
                     break;
                 
             }

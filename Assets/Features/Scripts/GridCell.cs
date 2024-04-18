@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GridSystem.GridConfig;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,20 +11,20 @@ namespace GridSystem
 
         [SerializeField] private Vector2Int Coordinates;
 
-        [SerializeField] public bool IsOccupied;
-        
+        [SerializeField] public bool IsPlaceableCell;
+        [SerializeField] public TileTypeEnum TileTypeEnum;
         [SerializeField] public List<GridCell> neighbours= new List<GridCell>();
         
         
-        public void InitCell(Vector2Int Coordinates,Sprite sprite)
+        public void InitCell(Vector2Int Coordinates,TileTypeEnum tileTypeEnum,Sprite sprite)
         {
             this.Coordinates = Coordinates;
-        
-            //Helper
             var coords = $"{this.Coordinates.x},{this.Coordinates.y}";
             gridCellHelper.SetCoordinatesText(coords);
             gridCellHelper.SetSprite(sprite);
             this.name = $"CELL_{coords}";
+            if (tileTypeEnum != TileTypeEnum.Wood)
+                IsPlaceableCell = true;
         }
     
     
@@ -32,18 +33,21 @@ namespace GridSystem
         {
             return Coordinates;
         }
-        public void SelectedState()
+        public void CellSelectedState()
         {
+           // Debug.Log("SelectedState");
             gridCellHelper.SetMaterialColor(GridTileState.selected);
         }
 
-        public void NeighbourState()
+        public void CellNeighbourState()
         {
+          //  Debug.Log("NeighbourState");
             gridCellHelper.SetMaterialColor(GridTileState.neighbour);
         }
 
-        public void NormalState()
+        public void CellNormalState()
         {
+            //Debug.Log("NormalState");
             gridCellHelper.SetMaterialColor(GridTileState.normal);
         }
 
@@ -55,7 +59,23 @@ namespace GridSystem
      
         }
         
+        public void CellSetectedState()
+        {
+            this.CellSelectedState();
+            foreach (var VARIABLE in neighbours)
+            {
+                VARIABLE.CellNeighbourState();
+            }
+        }
 
+        public void CellDeSelectedState()
+        {
+            this.CellNormalState();
+            foreach (var VARIABLE in neighbours)
+            {
+                VARIABLE.CellNormalState();
+            }
+        }
 
     }
 }

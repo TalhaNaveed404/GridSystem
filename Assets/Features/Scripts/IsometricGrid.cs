@@ -58,7 +58,7 @@ namespace GridSystem.Grid
                    TileTypeEnum tileTypeEnum= (TileTypeEnum)_dataArray[i, j];
                    GameObject tileObject = Instantiate(IsometricGridConfig.GridCellObject);
                    if(tileObject!=null)
-                   GenerateTile(tileObject,new Vector3Int(i,j,0),TileType(tileTypeEnum));
+                   GenerateTile(tileObject,new Vector3Int(i,j,0),tileTypeEnum);
                    GridArray[i, j] = tileObject.GetComponent<GridCell>(); 
                    
                }
@@ -108,14 +108,14 @@ namespace GridSystem.Grid
 
         }
 
-        void GenerateTile(GameObject Tile,Vector3Int PositionCoordinate,Sprite CellSprite)
+        void GenerateTile(GameObject Tile,Vector3Int PositionCoordinate,TileTypeEnum TileTypeEnum)
         {
-           
+            Sprite CellSprite=TileType(TileTypeEnum);
             Tile.transform.position = PositionCoordinate;
             Tile.transform.parent = Grid.transform;
-            Tile.AddComponent<GridSystem.GridCell>();
             GridCell gridCell = Tile.GetComponent<GridCell>();
-            gridCell.InitCell(new Vector2Int(PositionCoordinate.x,PositionCoordinate.y),CellSprite);
+            gridCell.InitCell(new Vector2Int(PositionCoordinate.x,PositionCoordinate.y),TileTypeEnum,CellSprite);
+            
             
         }
         
