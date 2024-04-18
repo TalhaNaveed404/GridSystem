@@ -13,4 +13,10 @@ public class TileMapTesting : MonoBehaviour
     {
     // tilemap.SetTile(position,woodTile);   
     }
+
+    void CreateGrid()
+    {
+        
+    }
+    
 }
