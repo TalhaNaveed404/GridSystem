@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2713486749439924792}
   - component: {fileID: 4313109313530562167}
   m_Layer: 0
-  m_Name: TestingSprite
+  m_Name: GridCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

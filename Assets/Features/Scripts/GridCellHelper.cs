@@ -2,14 +2,13 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace GridSystem.GridTile
+namespace GridSystem
 {
     public class GridCellHelper:MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI TileCoordinatesText;
         [FormerlySerializedAs("HexaMaterial")] [SerializeField] private GameObject TileMaterial;
-        [SerializeField] private Sprite CellSprite;
-
+        
         [SerializeField] private Color Normal;
         [SerializeField] private Color Selected;
         [SerializeField] private Color Neighbour;

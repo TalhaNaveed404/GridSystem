@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace GridSystem.GridTile
+namespace GridSystem
 {
     public class GridCell:MonoBehaviour
     {
