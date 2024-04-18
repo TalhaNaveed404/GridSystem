@@ -16,7 +16,7 @@ namespace GridSystem.GridGenerator
         public void GenerateGrid(string datafile,string dataLayout,IsometricGridConfig isometricGridConfig, string GridName)
         {
 
-          GameObject GridHolder=  Instantiate(new GameObject());
+       //   GameObject GridHolder=  Instantiate(new GameObject());
           
           GameObject gridContainer = new GameObject(GridName)
           {
@@ -29,8 +29,7 @@ namespace GridSystem.GridGenerator
 
 
 
-          Grid.IsometricGrid isometricGrid =
-              new IsometricGrid(gridContainer, dataLayout, datafile, isometricGridConfig);
+          Grid.IsometricGrid isometricGrid = new IsometricGrid(gridContainer, dataLayout, datafile, isometricGridConfig);
         }
         
         

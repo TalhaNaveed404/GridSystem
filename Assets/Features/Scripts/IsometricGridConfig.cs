@@ -3,9 +3,11 @@ using UnityEngine;
 
 namespace GridSystem.GridConfig
 {
-    [CreateAssetMenu(fileName = "GridConfig",menuName = "GridSystem/GridConfig")]
-    public class IsometricGridConfig
+    [CreateAssetMenu(fileName = "GridConfig",menuName = "GridSystem/IsometricGridConfig")]
+    public class IsometricGridConfig:ScriptableObject
     {
+        public GameObject GridCellObject;
+        
         public Sprite Dirt; 
         public Sprite Grass;
         public Sprite Stone;
