@@ -8,12 +8,12 @@ namespace GridSystem.GridGenerator
 {
 
 
-    [CreateAssetMenu(fileName = "GridGenerator", menuName = "GridSystem/GridGenerator")]
-    public class GridGenerator : ScriptableObject
+    [CreateAssetMenu(fileName = "GridGenerator", menuName = "GridSystem/GridSystem")]
+    public class GridSystem : ScriptableObject
     {
         private IsometricGrid IsometricGrid;
         
-        GridGenerator(string datafile,string dataLayout,IsometricGridConfig isometricGridConfig, string GridName)
+        public void GenerateGrid(string datafile,string dataLayout,IsometricGridConfig isometricGridConfig, string GridName)
         {
 
           GameObject GridHolder=  Instantiate(new GameObject());

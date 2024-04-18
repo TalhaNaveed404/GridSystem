@@ -26,7 +26,7 @@ namespace ProjectCore.DataLoading
             if (jsonData != null)
             {
                 TerrainGridData = JsonConvert.DeserializeObject<TerrainGridData>(jsonData.text);
-                ShowData();
+               // ShowData();
                 return TerrainGridData;
             }
 

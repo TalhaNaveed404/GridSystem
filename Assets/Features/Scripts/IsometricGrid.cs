@@ -24,13 +24,12 @@ namespace GridSystem.Grid
         public DataLoading DataLoading;
         private TerrainGridData TerrainGridData;
        public IsometricGrid(GameObject Grid,string dataLayout,string datafile,IsometricGridConfig IsometricGridConfig)
-        {
-            
-            
-            Grid = Grid;
+       {
 
-            DataLoading=Resources.Load<DataLoading>(dataLayout);
-             TerrainGridData=DataLoading.LoadData(datafile);
+
+           this.Grid = Grid;
+           DataLoading=Resources.Load<DataLoading>(dataLayout); 
+           TerrainGridData=DataLoading.LoadData(datafile);
            Rows= TerrainGridData.TerrainGrid.Count;
            Col = TerrainGridData.TerrainGrid[0].Count;
            this.IsometricGridConfig = IsometricGridConfig;
@@ -79,8 +78,6 @@ namespace GridSystem.Grid
             {
                 case(TileTypeEnum.Dirt):
                    Tile= Instantiate(TileObject);
-                   
-                   
                    break;
                     
                     default:
