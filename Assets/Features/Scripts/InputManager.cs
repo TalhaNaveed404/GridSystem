@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        
+        MouseScrolling();
         if (Input.GetMouseButtonDown(0))
         {
             
@@ -84,12 +84,47 @@ public class InputManager : MonoBehaviour
    private void TablePlaced()
    {
        _targetCell.GetComponent<GridCell>().CellDeSelectedState();
-       _selectedTable.transform.SetParent(_targetCell.transform);
+      // _selectedTable.transform.SetParent(_targetCell.transform);
+      
+      
        _selectedTable.transform.position = _targetCell.transform.position;
        _targetCell.IsPlaceableCell = false;
        _selectedTable.Placed = true;
        _selectedTable = null;
 
+   }
+
+   public void MouseScrolling()
+   {
+       float scroll = Input.GetAxis("Mouse ScrollWheel");
+       
+       float scrollY = Input.mouseScrollDelta.y;
+       float scrollX = Input.mouseScrollDelta.x;
+     
+       Debug.Log(scrollX+" "+scrollY);
+
+       // Check if the scrolls value is not zero
+       if (scroll != 0f)
+       {
+           // Determine the direction of scroll (up or down)
+           int scrollDirection = scroll > 0 ? 1 : -1;
+
+           // Handle scroll event (you can customize this part)
+           if (scrollDirection > 0)
+           {
+               // Scroll up action
+               Debug.Log("Scrolled up");
+           }
+           else
+           {
+               // Scroll down action
+               Debug.Log("Scrolled down");
+           }
+
+           // Adjust the object or perform any action based on the scroll
+           // For example, you can zoom in/out camera or adjust object scale
+           // transform.localScale += Vector3.one * scrollSpeed * Time.deltaTime;
+       }
    }
 
 

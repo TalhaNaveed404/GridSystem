@@ -15,9 +15,7 @@ public class TablePlacement : MonoBehaviour
     {
         SelectedTable = table;
         SelectedGridCell = gridCell;
-
-        
-        
+ 
     }
 
     void SelectedPlacementCell()
@@ -26,9 +24,11 @@ public class TablePlacement : MonoBehaviour
         {
             if (gridCell.IsPlaceableCell)
             {
-                
+                gridCell.HighLightPossiblePlacement();
             }
         }
         
     }
+    
+    
 }
