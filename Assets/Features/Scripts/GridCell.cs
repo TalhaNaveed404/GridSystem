@@ -23,8 +23,12 @@ namespace GridSystem
             gridCellHelper.SetCoordinatesText(coords);
             gridCellHelper.SetSprite(sprite);
             this.name = $"CELL_{coords}";
-            if (tileTypeEnum != TileTypeEnum.Wood)
+            if (tileTypeEnum == TileTypeEnum.Wood)
                 IsPlaceableCell = true;
+            else
+            {
+                IsPlaceableCell = false;
+            }
         }
     
     
@@ -75,6 +79,11 @@ namespace GridSystem
             {
                 VARIABLE.CellNormalState();
             }
+        }
+
+        public void HighLightPossiblePlacement()
+        {
+            gridCellHelper.HighLightPlacement();
         }
 
     }

@@ -12,7 +12,7 @@ namespace GridSystem
         [SerializeField] private Color Normal;
         [SerializeField] private Color Selected;
         [SerializeField] private Color Neighbour;
-    
+        [SerializeField] private Color HighLighted;
         public void SetCoordinatesText(string coordinates)
         {
             TileCoordinatesText.text = coordinates;
@@ -41,6 +41,12 @@ namespace GridSystem
             }
        
         }
+
+        public void HighLightPlacement()
+        {
+            TileMaterial.gameObject.GetComponent<SpriteRenderer>().material.color = HighLighted;
+        }
+        
     }
 }
 public enum GridTileState
