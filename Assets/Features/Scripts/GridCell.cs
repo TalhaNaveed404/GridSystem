@@ -3,25 +3,25 @@ using GridSystem.GridConfig;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace GridSystem
+namespace GridSystem.GridFields
 {
     public class GridCell:MonoBehaviour
     {
-        [FormerlySerializedAs("GridTileHelper")] [FormerlySerializedAs("TileHelper")] [SerializeField] private GridCellHelper gridCellHelper;
+        [FormerlySerializedAs("gridCellHelper")] [SerializeField] private GridCellView gridCellView;
 
         [SerializeField] private Vector2Int Coordinates;
 
         [SerializeField] public bool IsPlaceableCell;
-        [SerializeField] public TileTypeEnum TileTypeEnum;
+       
         [SerializeField] public List<GridCell> neighbours= new List<GridCell>();
         
         
-        public void InitCell(Vector2Int Coordinates,TileTypeEnum tileTypeEnum,Sprite sprite)
+        public void InitCell(Vector2Int coordinates,TileTypeEnum tileTypeEnum,Sprite sprite)
         {
-            this.Coordinates = Coordinates;
+            this.Coordinates = coordinates;
             var coords = $"{this.Coordinates.x},{this.Coordinates.y}";
-            gridCellHelper.SetCoordinatesText(coords);
-            gridCellHelper.SetSprite(sprite);
+            gridCellView.SetCoordinatesText(coords);
+            gridCellView.SetSprite(sprite);
             this.name = $"CELL_{coords}";
             if (tileTypeEnum == TileTypeEnum.Wood)
                 IsPlaceableCell = true;
@@ -39,17 +39,17 @@ namespace GridSystem
         }
         public void CellSelectedState()
         {
-            gridCellHelper.SetMaterialColor(GridTileState.selected);
+            gridCellView.SetMaterialColor(GridTileState.selected);
         }
 
         public void CellNeighbourState()
         {
-            gridCellHelper.SetMaterialColor(GridTileState.neighbour);
+            gridCellView.SetMaterialColor(GridTileState.neighbour);
         }
 
         public void CellNormalState()
         {
-            gridCellHelper.SetMaterialColor(GridTileState.normal);
+            gridCellView.SetMaterialColor(GridTileState.normal);
         }
 
         
@@ -79,11 +79,11 @@ namespace GridSystem
 
         public void HighLightPossiblePlacement()
         {
-            gridCellHelper.SetMaterialColor(GridTileState.placement);
+            gridCellView.SetMaterialColor(GridTileState.placement);
         }
         public void HighLightNeighbourPlacement()
         {
-            gridCellHelper.SetMaterialColor(GridTileState.neighbourPlacmement);
+            gridCellView.SetMaterialColor(GridTileState.neighbourPlacmement);
         }
         
         

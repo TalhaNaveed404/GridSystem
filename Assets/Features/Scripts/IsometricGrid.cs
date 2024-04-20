@@ -1,10 +1,9 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GridSystem.GridConfig;
 using ProjectCore.DataLoading;
 using Sirenix.OdinInspector;
 using UnityEngine;
-
+using GridSystem.GridFields;
 
 namespace GridSystem.Grid
 {  
@@ -24,15 +23,17 @@ namespace GridSystem.Grid
         private DataLoading _dataLoading;
         private TerrainGridData _terrainGridData;
         private GameObject _grid;
-       public IsometricGrid(GameObject Grid,string dataLayout,string datafile,IsometricGridConfig IsometricGridConfig)
+        
+        #region GridGeneration
+       public IsometricGrid(GameObject grid,string dataLayout,string datafile,IsometricGridConfig isometricGridConfig)
        {
 
-           this._grid = Grid;
+           this._grid = grid;
            _dataLoading=Resources.Load<DataLoading>(dataLayout); 
            _terrainGridData=_dataLoading.LoadData(datafile);
            Rows= _terrainGridData.TerrainGrid.Count;
            Col = _terrainGridData.TerrainGrid[0].Count;
-           this.IsometricGridConfig = IsometricGridConfig;
+           this.IsometricGridConfig = isometricGridConfig;
 
 
            _dataArray = new int[Rows, Col];
@@ -52,7 +53,7 @@ namespace GridSystem.Grid
                for (int j = 0; j < Col; j++)
                {
                    TileTypeEnum tileTypeEnum= (TileTypeEnum)_dataArray[i, j];
-                   GameObject tileObject = Instantiate(IsometricGridConfig.GridCellObject);
+                   GameObject tileObject = Instantiate(isometricGridConfig.GridCellObject);
                    if(tileObject!=null)
                    GenerateTile(tileObject,new Vector3Int(i,j,0),tileTypeEnum);
                    GridArray[i, j] = tileObject.GetComponent<GridCell>(); 
@@ -98,42 +99,42 @@ namespace GridSystem.Grid
 
         }
 
-        void GenerateTile(GameObject Tile,Vector3Int PositionCoordinate,TileTypeEnum TileTypeEnum)
+        void GenerateTile(GameObject tile,Vector3Int positionCoordinate,TileTypeEnum tileTypeEnum)
         {
-            Sprite _cellSprite=TileType(TileTypeEnum);
-            Tile.transform.position = PositionCoordinate;
-            Tile.transform.parent = _grid.transform;
-            GridCell gridCell = Tile.GetComponent<GridCell>();
-            gridCell.InitCell(new Vector2Int(PositionCoordinate.x,PositionCoordinate.y),TileTypeEnum,_cellSprite);
-            
+            Sprite cellSprite=TileType(tileTypeEnum);
+            tile.transform.position = positionCoordinate;
+            tile.transform.parent = _grid.transform;
+            GridCell gridCell = tile.GetComponent<GridCell>();
+            gridCell.InitCell(new Vector2Int(positionCoordinate.x,positionCoordinate.y),tileTypeEnum,cellSprite);
             
         }
         
+        #endregion
+        
+        
+        
         #region Finding Neighbour
-
-         
-        public void CalculateNeighbours()
+        
+        private void CalculateNeighbours()
         {
             for (int r = 0; r < Rows; r++)
             {
                 for (int c = 0; c < Col; c++)
                 {
-                    FindNeigbhoringTile(new Vector2Int(r, c));
-                    // NeighbouringTiles(new Vector2Int(c, c));
-
+                    FindNeigbouringTile(new Vector2Int(r, c));
                 }
             }
         }
 
         [Button]
-        public void FindNeigbhoringTile(Vector2Int neighbour)
+        public void FindNeigbouringTile(Vector2Int neighbour)
         {
             _neighbourList.Clear();
             int minCol = 0, minRow = 0, maxCol = Col, maxRow = Rows;
             for (int i = 0; i < IsometricGridUtilities.NeighboursConstant.Count; i++)
             {
                 var neighbourCoordinate = IsometricGridUtilities.FindNeighbours(neighbour, i);
-                if (neighbourCoordinate.x >= minCol && neighbourCoordinate.x < maxCol && neighbourCoordinate.y >= minRow && neighbourCoordinate.y < maxRow )//&& GridCells[item.x, item.y].GetViewState() == HexTileViewState.Enabled)
+                if (neighbourCoordinate.x >= minCol && neighbourCoordinate.x < maxCol && neighbourCoordinate.y >= minRow && neighbourCoordinate.y < maxRow )
                 {
                     _neighbourList.Add(GridArray[neighbourCoordinate.x,neighbourCoordinate.y]);
                 }

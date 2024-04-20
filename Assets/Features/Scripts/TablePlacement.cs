@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using GridSystem;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-
+using GridSystem.PlacementObjects;
+using GridSystem.GridFields;
 public class TablePlacement 
 {
 
@@ -50,8 +46,7 @@ public class TablePlacement
         }
 
     }
-
-
+    
     GridCell FindPlaceableNeighbour(Vector2Int neighbourCoordinate)
     {
         foreach (GridCell neighbour in _selectedGridCell.neighbours)

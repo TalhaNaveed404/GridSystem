@@ -1,29 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using GridSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
-
+using GridSystem.PlacementObjects;
+using GridSystem.GridFields;
 public class InputManager : MonoBehaviour
 {
-   
-  
-    //Input Related Stuff
-    [FormerlySerializedAs("raycastDistance")] public float RaycastDistance = 1f;
-    [SerializeField] private LayerMask LayerMask;
-    [FormerlySerializedAs("cellSize")] [SerializeField] float CellSize=1;
-
-    [SerializeField]private Vector3 _gridOffset;
-    private Vector3 _screenPoint;
-    private Vector3 _offset;
     
+    //Input Related Stuff
+    public float RaycastDistance = 1f;
+    [SerializeField] private LayerMask LayerMask;
+    [SerializeField] float CellSize=1;
+    [SerializeField] private Vector3 _offset;
+    
+    private Vector3 _screenPoint;
     private GridCell _targetCell=null;
     private Table _selectedTable;
     private TablePlacement _tablePlacement= new TablePlacement();
    
-    
-    
-    
+
     private void OnEnable()
     { 
         InputOnEnable();
@@ -33,7 +25,6 @@ public class InputManager : MonoBehaviour
     {
         LayerMask = LayerMask.GetMask("Table");
     }
-    
     
     void Update()
     {
@@ -89,12 +80,9 @@ public class InputManager : MonoBehaviour
     void CellDetectionRayCast()
     {
         Vector3 bottomPosition = _selectedTable.gameObject.transform.position;
-        _selectedTable.GetComponent<BoxCollider2D>().isTrigger = true;
-/////////
         LayerMask mask = LayerMask.GetMask("TileLayer");
         RaycastHit2D hit = Physics2D.Raycast(bottomPosition, -Vector2.up, RaycastDistance, mask);
-        ////////
-      
+        
         if (hit.collider != null)
         {
             Debug.Log("TargetCell"+_targetCell);
@@ -111,7 +99,6 @@ public class InputManager : MonoBehaviour
                 {
                     _targetCell.CellDeSelectedState();
                     _targetCell.ShowPossiblePlacement();
-                 //   _tablePlacement.PlaceTable(_selectedTable, _targetCell);
                 }
                 else
                     _targetCell.GetComponent<GridCell>().CellSetectedState();
@@ -135,7 +122,7 @@ public class InputManager : MonoBehaviour
         return new Vector3(x, y, z);
     }
     
-   void TileDetection()
+    void TileDetection()
    {
        Debug.Log("Selected Table"+_selectedTable);
        if(_targetCell!=null&&_targetCell.IsPlaceableCell)
@@ -158,16 +145,6 @@ public class InputManager : MonoBehaviour
        _targetCell = null;
    }
 
-   private void TablePlacement()
-   {
-       _targetCell.GetComponent<GridCell>().CellDeSelectedState();
-       _selectedTable.transform.position = _targetCell.transform.position;
-       _targetCell.IsPlaceableCell = false;
-       _selectedTable.Placed = true;
-       _selectedTable = null;
-
-   }
-
-  
+   
   
 }

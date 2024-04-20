@@ -1,10 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace GridSystem
+namespace GridSystem.GridFields
 {
-    public class GridCellHelper:MonoBehaviour
+    public class GridCellView:MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI TileCoordinatesText; 
         [SerializeField] private GameObject TileMaterial;
@@ -30,7 +29,7 @@ namespace GridSystem
             switch (gridTileState)
             {
                 case(GridTileState.normal):
-                    TileMaterial.gameObject.GetComponent<SpriteRenderer>().material.color = Normal;////HexaMaterial.color = Normal;
+                    TileMaterial.gameObject.GetComponent<SpriteRenderer>().material.color = Normal;
                     break;
                 case(GridTileState.selected):
                     TileMaterial.GetComponent<SpriteRenderer>().material.color = Selected;
@@ -50,15 +49,6 @@ namespace GridSystem
        
         }
 
-        public void NeighbourPlacement()
-        {
-            TileMaterial.GetComponent<SpriteRenderer>().material.color = NeighbourPlacemement;
-        }
-        
-        public void HighLightPlacement()
-        {
-            TileMaterial.GetComponent<SpriteRenderer>().material.color = HighLighted;
-        }
         
     }
 }

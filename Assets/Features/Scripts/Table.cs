@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace GridSystem
+namespace GridSystem.PlacementObjects
 {
     public class Table:MonoBehaviour
     {
@@ -13,8 +13,9 @@ namespace GridSystem
         public bool IsHorizontal;
         private void Start()
         {
-            HorizontalTable();
-            IsHorizontal = true;
+            
+           SetTableRotation();
+          
         }
 
        public void SetTableRotation()
