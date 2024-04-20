@@ -10,10 +10,6 @@ using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 public class TileMapTesting : MonoBehaviour
 {
-    // [SerializeField] Tilemap tilemap;
-    // [SerializeField] private Tile woodTile;
-    // [FormerlySerializedAs("positon")] [SerializeField] private Vector3Int position;
-    //
     [SerializeField] private string DataFile;
     [SerializeField] private string DataLayout;
 

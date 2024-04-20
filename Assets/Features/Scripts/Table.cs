@@ -8,22 +8,42 @@ namespace GridSystem
     {
         public Vector3 StartPosition;
         public bool Placed;
-        public Sprite TableSpriteHorizontal;
-        public Sprite TableSpriteVertical;
-
+        public GameObject TableSpriteHorizontal;
+        public GameObject TableSpriteVertical;
+        public bool IsHorizontal;
         private void Start()
         {
             HorizontalTable();
+            IsHorizontal = true;
         }
 
+       public void SetTableRotation()
+        {
+            if (IsHorizontal)
+            {
+                VerticalTable();
+            }
+            else
+            {
+                HorizontalTable();
+            }
+
+            IsHorizontal = !IsHorizontal;
+        }
+        
         private void HorizontalTable()
         {
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = TableSpriteHorizontal;
+            
+            TableSpriteHorizontal.SetActive(true);
+            TableSpriteVertical.SetActive(false);
         }
 
         private void VerticalTable()
         {
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = TableSpriteVertical;
+            TableSpriteHorizontal.SetActive(false);
+            TableSpriteVertical.SetActive(true);
         }
+        
+       
     }
 }

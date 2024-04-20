@@ -1,13 +1,10 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using GridSystem;
 using GridSystem.GridConfig;
-
 using ProjectCore.DataLoading;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
-using Tile = UnityEngine.WSA.Tile;
+
 
 namespace GridSystem.Grid
 {  
@@ -23,18 +20,18 @@ namespace GridSystem.Grid
         
         private List<GridCell> _neighbourList = new List<GridCell>();
         private int[,] _dataArray ;
-        private string DataFile;
-        private DataLoading DataLoading;
-        private TerrainGridData TerrainGridData;
-        private GameObject Grid;
+        private string _dataFile;
+        private DataLoading _dataLoading;
+        private TerrainGridData _terrainGridData;
+        private GameObject _grid;
        public IsometricGrid(GameObject Grid,string dataLayout,string datafile,IsometricGridConfig IsometricGridConfig)
        {
 
-           this.Grid = Grid;
-           DataLoading=Resources.Load<DataLoading>(dataLayout); 
-           TerrainGridData=DataLoading.LoadData(datafile);
-           Rows= TerrainGridData.TerrainGrid.Count;
-           Col = TerrainGridData.TerrainGrid[0].Count;
+           this._grid = Grid;
+           _dataLoading=Resources.Load<DataLoading>(dataLayout); 
+           _terrainGridData=_dataLoading.LoadData(datafile);
+           Rows= _terrainGridData.TerrainGrid.Count;
+           Col = _terrainGridData.TerrainGrid[0].Count;
            this.IsometricGridConfig = IsometricGridConfig;
 
 
@@ -42,14 +39,13 @@ namespace GridSystem.Grid
            GridArray = new GridCell[Rows, Col];
            for (int i = 0; i < Rows; i++)
            {
-               List<TileData> innerList = TerrainGridData.TerrainGrid[i];
+               List<TileData> innerList = _terrainGridData.TerrainGrid[i];
                for (int j = 0; j < Col; j++)
                {
                    _dataArray[i, j] = innerList[j].TileType;
                }
            }
-
-           // Display the 2D array
+           
            for (int i = 0; i < Rows; i++)
            {
                string tiledata = "";
@@ -70,33 +66,27 @@ namespace GridSystem.Grid
 
 
        }
-
-       void ResourcesDataLoading()
-       {
-           
-       }
-       
+ 
         Sprite TileType(TileTypeEnum tileTypeEnum)
         {
-            Vector3 tilePositition;
-            Sprite CellSprite;
+            Sprite cellSprite;
             switch (tileTypeEnum)
             {
                 case(TileTypeEnum.Dirt):
-                    CellSprite= IsometricGridConfig.Dirt;
-                    return CellSprite;
+                    cellSprite= IsometricGridConfig.Dirt;
+                    return cellSprite;
                    
                 case(TileTypeEnum.Grass):
-                    CellSprite = IsometricGridConfig.Grass;
-                    return CellSprite;
+                    cellSprite = IsometricGridConfig.Grass;
+                    return cellSprite;
                 
                 case(TileTypeEnum.Stone):
-                    CellSprite = IsometricGridConfig.Stone;
-                    return CellSprite;
+                    cellSprite = IsometricGridConfig.Stone;
+                    return cellSprite;
                 
                 case(TileTypeEnum.Wood):
-                    CellSprite = IsometricGridConfig.Wood;
-                    return CellSprite;
+                    cellSprite = IsometricGridConfig.Wood;
+                    return cellSprite;
                 
                 default:
                     Debug.Log("No possible Tile");
@@ -110,11 +100,11 @@ namespace GridSystem.Grid
 
         void GenerateTile(GameObject Tile,Vector3Int PositionCoordinate,TileTypeEnum TileTypeEnum)
         {
-            Sprite CellSprite=TileType(TileTypeEnum);
+            Sprite _cellSprite=TileType(TileTypeEnum);
             Tile.transform.position = PositionCoordinate;
-            Tile.transform.parent = Grid.transform;
+            Tile.transform.parent = _grid.transform;
             GridCell gridCell = Tile.GetComponent<GridCell>();
-            gridCell.InitCell(new Vector2Int(PositionCoordinate.x,PositionCoordinate.y),TileTypeEnum,CellSprite);
+            gridCell.InitCell(new Vector2Int(PositionCoordinate.x,PositionCoordinate.y),TileTypeEnum,_cellSprite);
             
             
         }

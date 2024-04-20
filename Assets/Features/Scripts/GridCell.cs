@@ -39,19 +39,16 @@ namespace GridSystem
         }
         public void CellSelectedState()
         {
-           // Debug.Log("SelectedState");
             gridCellHelper.SetMaterialColor(GridTileState.selected);
         }
 
         public void CellNeighbourState()
         {
-          //  Debug.Log("NeighbourState");
             gridCellHelper.SetMaterialColor(GridTileState.neighbour);
         }
 
         public void CellNormalState()
         {
-            //Debug.Log("NormalState");
             gridCellHelper.SetMaterialColor(GridTileState.normal);
         }
 
@@ -60,7 +57,6 @@ namespace GridSystem
         public void SetNeighbourList(List<GridCell> neighbouringTiles)
         {
             neighbours.AddRange( neighbouringTiles);
-     
         }
         
         public void CellSetectedState()
@@ -83,7 +79,23 @@ namespace GridSystem
 
         public void HighLightPossiblePlacement()
         {
-            gridCellHelper.HighLightPlacement();
+            gridCellHelper.SetMaterialColor(GridTileState.placement);
+        }
+        public void HighLightNeighbourPlacement()
+        {
+            gridCellHelper.SetMaterialColor(GridTileState.neighbourPlacmement);
+        }
+        
+        
+        public void ShowPossiblePlacement()
+        {
+            HighLightPossiblePlacement();
+            foreach (var VARIABLE in neighbours)
+            {
+                if (VARIABLE.IsPlaceableCell)
+                    VARIABLE.HighLightNeighbourPlacement();
+            }
+            
         }
 
     }

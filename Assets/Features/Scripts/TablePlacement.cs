@@ -1,34 +1,80 @@
 using System.Collections;
 using System.Collections.Generic;
 using GridSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class TablePlacement : MonoBehaviour
+public class TablePlacement 
 {
 
-    [SerializeField] private Table SelectedTable;
-    [SerializeField] private GridCell SelectedGridCell;
-
-
+     private Table _selectedTable;
+     private GridCell _selectedGridCell;
+     private Vector2Int _selectedCellCoordinate;
+    
     public void PlaceTable(Table table,GridCell gridCell)
     {
-        SelectedTable = table;
-        SelectedGridCell = gridCell;
- 
+        _selectedTable = table;
+        _selectedGridCell = gridCell;
+        SelectedPlacementCell();
+
     }
 
+   
     void SelectedPlacementCell()
     {
-        foreach (GridCell gridCell in SelectedGridCell.neighbours)
+        GridCell neighbourCell;
+        if (_selectedTable.IsHorizontal)
         {
-            if (gridCell.IsPlaceableCell)
-            {
-                gridCell.HighLightPossiblePlacement();
-            }
+            _selectedCellCoordinate=_selectedGridCell.GetCoordinate();
+            neighbourCell=FindPlaceableNeighbour(new Vector2Int(1, 0));
+        }
+        else
+        {
+            _selectedCellCoordinate=_selectedGridCell.GetCoordinate();
+            neighbourCell=FindPlaceableNeighbour(new Vector2Int(0, 1));
         }
         
+        if (neighbourCell != null)
+        {
+            _selectedGridCell.IsPlaceableCell = false;
+            neighbourCell.IsPlaceableCell = false;
+            SuccessFulPlacement();
+
+        }
+        else
+        {
+            _selectedTable.transform.position = _selectedTable.StartPosition;
+            _selectedGridCell.CellDeSelectedState();
+            Debug.Log("No cell detected");    
+        }
+
     }
+
+
+    GridCell FindPlaceableNeighbour(Vector2Int neighbourCoordinate)
+    {
+        foreach (GridCell neighbour in _selectedGridCell.neighbours)
+        {
+            if (neighbour.GetCoordinate() == neighbourCoordinate+_selectedCellCoordinate&&neighbour.IsPlaceableCell)
+            {
+                return neighbour;
+            }
+        }
+
+        return null;
+    }
+
+    void SuccessFulPlacement()
+    {
+        _selectedGridCell.GetComponent<GridCell>().CellDeSelectedState();
+        _selectedTable.transform.position = _selectedGridCell.transform.position;
+        _selectedGridCell.IsPlaceableCell = false;
+        _selectedTable.Placed = true;
+        _selectedTable = null;
+    }
+    
+    
     
     
 }

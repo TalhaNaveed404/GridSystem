@@ -100,12 +100,12 @@ TextureImporter:
       name: table_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 2
         y: 4
-        width: 93
+        width: 92
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.32450983, y: 0.345173}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: table_1
       rect:
         serializedVersion: 2
-        x: 99
+        x: 98
         y: 4
-        width: 93
+        width: 94
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.70839435, y: 0.34744987}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

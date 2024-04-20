@@ -13,9 +13,7 @@ namespace GridSystem.GridConfig
         public Sprite Stone;
         public Sprite Wood;
     }
-    
-    
-    
+ 
     [Serializable]
     public enum TileTypeEnum
     {

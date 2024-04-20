@@ -123,6 +123,8 @@ MonoBehaviour:
   Normal: {r: 1, g: 1, b: 1, a: 1}
   Selected: {r: 0.33962262, g: 0.29316482, b: 0.29316482, a: 1}
   Neighbour: {r: 1, g: 0, b: 0, a: 1}
+  HighLighted: {r: 0.19416976, g: 1, b: 0, a: 1}
+  NeighbourPlacemement: {r: 0.28595585, g: 0.2888463, b: 0.9622642, a: 1}
 --- !u!50 &-4012758852159448401
 Rigidbody2D:
   serializedVersion: 4
