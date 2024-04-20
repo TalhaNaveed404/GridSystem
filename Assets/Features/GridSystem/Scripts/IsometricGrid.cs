@@ -20,7 +20,7 @@ namespace GridSystem.Grid
         private List<GridCell> _neighbourList = new List<GridCell>();
         private int[,] _dataArray ;
         private string _dataFile;
-        private DataLoading _dataLoading;
+        private IsometricGridData _isometricGridData;
         private TerrainGridData _terrainGridData;
         private GameObject _grid;
         
@@ -29,8 +29,8 @@ namespace GridSystem.Grid
        {
 
            this._grid = grid;
-           _dataLoading=Resources.Load<DataLoading>(dataLayout); 
-           _terrainGridData=_dataLoading.LoadData(datafile);
+           _isometricGridData=Resources.Load<IsometricGridData>(dataLayout); 
+           _terrainGridData=_isometricGridData.LoadData(datafile);
            Rows= _terrainGridData.TerrainGrid.Count;
            Col = _terrainGridData.TerrainGrid[0].Count;
            this.IsometricGridConfig = isometricGridConfig;
@@ -131,9 +131,9 @@ namespace GridSystem.Grid
         {
             _neighbourList.Clear();
             int minCol = 0, minRow = 0, maxCol = Col, maxRow = Rows;
-            for (int i = 0; i < IsometricGridUtilities.NeighboursConstant.Count; i++)
+            for (int i = 0; i < IsometricGridNeighbourFinding.NeighboursConstant.Count; i++)
             {
-                var neighbourCoordinate = IsometricGridUtilities.FindNeighbours(neighbour, i);
+                var neighbourCoordinate = IsometricGridNeighbourFinding.FindNeighbours(neighbour, i);
                 if (neighbourCoordinate.x >= minCol && neighbourCoordinate.x < maxCol && neighbourCoordinate.y >= minRow && neighbourCoordinate.y < maxRow )
                 {
                     _neighbourList.Add(GridArray[neighbourCoordinate.x,neighbourCoordinate.y]);
