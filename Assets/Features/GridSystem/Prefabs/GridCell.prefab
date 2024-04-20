@@ -101,10 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c103b2eb836549379040c72b1b2d3d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridCellHelper: {fileID: 4313109313530562167}
+  gridCellView: {fileID: 4313109313530562167}
   Coordinates: {x: 0, y: 0}
   IsPlaceableCell: 0
-  TileTypeEnum: 0
   neighbours: []
 --- !u!114 &4313109313530562167
 MonoBehaviour:
@@ -214,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2306004367943348882
 RectTransform:
   m_ObjectHideFlags: 0
