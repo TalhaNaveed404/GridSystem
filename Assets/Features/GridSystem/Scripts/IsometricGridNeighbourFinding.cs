@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GridSystem
 {
-    public class IsometricGridUtilities
+    public class IsometricGridNeighbourFinding
     {
         public static List<Vector2Int> NeighboursConstant = new List<Vector2Int>()
         {

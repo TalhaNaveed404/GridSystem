@@ -2,7 +2,7 @@ using GridSystem.GridConfig;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
-public class TileMapTesting : MonoBehaviour
+public class GridGenerator : MonoBehaviour
 {
     [SerializeField] private string DataFile;
     [SerializeField] private string DataLayout;

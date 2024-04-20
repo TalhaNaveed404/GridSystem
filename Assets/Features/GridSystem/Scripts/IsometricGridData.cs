@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace ProjectCore.DataLoading
 {
     [CreateAssetMenu(fileName = "DataLoading",menuName = "ProjectCore/DataLoading")]
-    public class DataLoading : ScriptableObject
+    public class IsometricGridData : ScriptableObject
     {
         
         [SerializeField] private string FileName;
